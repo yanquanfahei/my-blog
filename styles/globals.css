@@ -1,16 +1,90 @@
-html,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  /* 导航栏区域 */
+  .header {
+    @apply fixed z-10 flex justify-between items-center;
+    @apply border-b-[1px] dark:border-slate-50/[0.06] w-full h-14 px-6;
+    @apply backdrop-blur bg-white/50 dark:bg-transparent;
+    @apply text-slate-700 dark:text-slate-200;
+  }
+  .nav-wrap {
+    @apply sm:flex items-start flex-col sm:flex-row sm:items-center flex-1;
+    @apply absolute top-14 left-0 sm:static;
+    @apply w-full px-2 pt-2 pb-3 sm:p-0;
+    @apply bg-white dark:bg-slate-900 sm:bg-transparent;
+  }
+  .nav-bar {
+    @apply flex flex-1 flex-col sm:flex-row;
+    @apply w-full sm:space-x-8;
+  }
+  .search-wrap {
+    @apply inline-block overflow-hidden;
+    @apply rounded-md border dark:border-slate-800 w-full sm:w-fit;
+  }
+  .search-input {
+    @apply py-1 px-2 w-full dark:bg-slate-800;
+    @apply focus:outline-none;
+  }
+  .settings-wrap {
+    @apply flex items-center;
+    @apply sm:border-l sm:dark:border-slate-800 sm:ml-6 sm:pl-6;
+  }
+
+  /* 文章列表项 */
+  .article-item {
+    @apply flex;
+    @apply mb-5 rounded-md px-5 py-3;
+    @apply bg-white hover:bg-slate-50 dark:bg-slate-800/50 dark:hover:bg-slate-800/70;
+    @apply cursor-pointer;
+  }
+  .article-item-title {
+    @apply text-black dark:text-white text-base truncate;
+  }
+}
+
+@layer utilities {
+  /* 滚动条美化 */
+  .scrollbar::-webkit-scrollbar {
+    @apply bg-transparent w-1 h-1 ;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-500/50 rounded;
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-slate-100 dark:bg-slate-500/[0.16] rounded;
+  }
+  
+  /* 多行超出换行 */
+  .multi-truncate {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* 不同主题模式下的背景色 */
+  .mode-bg {
+    @apply bg-white dark:bg-slate-800/50
+  }
+  /* 不同主题模式下的文本颜色 */
+  .mode-text-color {
+    @apply text-black dark:text-white
+  }
+}
+
+html {
+  @apply h-full;
+ }
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  @apply h-full scrollbar bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
+#__next {
+  @apply h-full flex flex-col;
 }
