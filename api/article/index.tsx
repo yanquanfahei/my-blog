@@ -1,12 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import type { AnchorHeading, IArticle, IArticleDetail } from './type'
-import remarkHeadings, { Heading } from '@/utils/remark-headings'
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkStringify from "remark-stringify";
-import {visit} from 'unist-util-visit'
+import type { IArticle, IArticleDetail } from './type'
+import { remark } from 'remark'
+import remarkHeadingAnchor from 'remark-heading-anchor';
+
+
 
 const blogDataPath = path.join(process.cwd(), '/blog-data')
 
@@ -55,18 +54,16 @@ export const getArticleDetail: (id: string) => Promise<IArticleDetail> = async (
   const matterResult: Omit<IArticle, 'id'> = matter(fileContents)
   const content = matterResult.content
 
-  const processor = unified()
-  .use(remarkParse)
-  .use(remarkStringify)
-  .use(remarkHeadings)
-
-  const vfile = await processor.process(content);
-  const { headings } = vfile.data;
+  const vfile = await remark()
+  .use(remarkHeadingAnchor, {
+    idPrefix: 'heading-'
+  })
+  .process(content)
 
   return {
     id,
     ...matterResult.data,
-    headings,
+    headings: vfile.result,
     mdContent: content
   }
 }

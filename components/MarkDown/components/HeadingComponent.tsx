@@ -14,7 +14,7 @@ const HeadingComponent: HeadingComponent = ({ index, children, level }) => {
   return React.createElement(
     `h${level}`,
     {
-      id: `heading-${level}-${index}`,
+      id: `heading-${index}`,
       className: `${claSize[level]} font-bold my-4`
     },
     children

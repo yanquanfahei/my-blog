@@ -7,20 +7,19 @@ import { useState } from "react";
 
 const ArticleDetail:NextPage<IArticleDetail> = ({ mdContent, headings }) => {
   const [activePoint, setActivePoint] = useState('')
-
   return (
     <div className="flex container mx-auto justify-around mt-6">
-      <div className="flex-1 mr-8 mode-bg mode-text-color rounded-md py-3 px-6">
+      <div className="flex-1 md:mr-8 mode-bg mode-text-color rounded-md py-3 px-6">
         <MarkDown mdContent={ mdContent } />
       </div>
-      <div className="hidden md:block mode-bg px-3 py-2 mode-text-color rounded-md shrink-0">
+      <div className="hidden h-96 overflow-auto md:block mode-bg px-3 py-2 mode-text-color rounded-md shrink-0">
         <div className="border-b border-slate-300 dark:border-slate-50/[0.06] py-1">目录</div>
         <ul className="py-1">
           { headings.map((item, i) => {
             return (
               <li
                 className={cls({
-                  'ml-4': item.depth === 3,
+                  'ml-4': item.level === 3,
                   'text-sky-500': activePoint === item.id
                 })}
                 key={i}
@@ -28,7 +27,7 @@ const ArticleDetail:NextPage<IArticleDetail> = ({ mdContent, headings }) => {
                 <a 
                   href={`#${item.id}`}
                   onClick={() => setActivePoint(item.id)}
-                >{ item.value }</a>
+                >{ item.title }</a>
               </li>
             )
           }) }

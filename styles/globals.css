@@ -9,7 +9,7 @@
     @apply fixed z-10 flex justify-between items-center;
     @apply border-b-[1px] dark:border-slate-50/[0.06] w-full h-14 px-6;
     @apply backdrop-blur bg-white/50 dark:bg-transparent;
-    @apply text-slate-700 dark:text-slate-200;
+    @apply text-slate-700 dark:text-slate-200 dark:bg-slate-900;
   }
   .nav-wrap {
     @apply sm:flex items-start flex-col sm:flex-row sm:items-center flex-1;
