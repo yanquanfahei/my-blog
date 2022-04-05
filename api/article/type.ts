@@ -1,4 +1,4 @@
-import type { Heading } from '@/utils/remark-headings'
+import type { IHeading } from 'remark-heading-anchor'
 
 // 文章列表项类型定义
 export interface IArticle {
@@ -10,10 +10,8 @@ export interface IArticle {
   [propName: string]: any
 }
 
-export type AnchorHeading = Heading & { id: string }
-
 // 文章详情数据接口
 export interface IArticleDetail extends IArticle {
-  headings: AnchorHeading[];
+  headings: IHeading[];
   mdContent: string;
 }
